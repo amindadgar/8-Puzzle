@@ -20,9 +20,7 @@ class MainActivity : AppCompatActivity() {
             findViewById<View>(R.id.ImageNumber5),findViewById<View>(R.id.ImageNumber6),
             findViewById<View>(R.id.ImageNumber7),findViewById<View>(R.id.ImageNumber8),
             findViewById<View>(R.id.ImageNumber9))
-//        ChangePosition(number[1],false,96)
-//        ChangePosition(number[8],false,-96)
-//        ChangePosition(number[2],false,96)
+
         val nodes :MutableList<Nodes> = ArrayList()
         for (i in 0 .. 9)
             nodes.add(i,Nodes(number[i]))
