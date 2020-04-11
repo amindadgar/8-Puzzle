@@ -2,6 +2,10 @@ package com.example.puzzle
 
 import android.animation.ObjectAnimator
 import android.content.res.Resources
+import android.util.Log
+import kotlinx.coroutines.Delay
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 
 
 fun dpToPx(dp: Int): Float {
@@ -12,7 +16,7 @@ fun pxToDp(px: Int): Float {
     return (px / Resources.getSystem().getDisplayMetrics().density)
 }
 
-fun ChangePosition(node: Nodes, X:Boolean, M:Int= 96){
+suspend fun ChangePosition(node: Nodes, X:Boolean, M:Int= 96){
     if (X) {
         if (M>0) node.x++
         else node.x--
@@ -26,11 +30,10 @@ fun ChangePosition(node: Nodes, X:Boolean, M:Int= 96){
         ObjectAnimator
             .ofFloat(node.node, "translationX", dpToPx(M))
             .apply {
-                duration = 1000
+                duration = 400
                 start()
             }
-
-
+        delay(500L)
     }
     else {
         if (M>0) node.y ++
@@ -42,38 +45,59 @@ fun ChangePosition(node: Nodes, X:Boolean, M:Int= 96){
             node.y ++
             return
         }
-
         ObjectAnimator
             .ofFloat(node.node, "translationY", dpToPx(M))
             .apply {
-                duration = 1000
+                duration = 400
                 start()
             }
-
+        delay(500L)
     }
 }
-fun randomPosition(node: MutableList<Nodes>){
-    val a = GetUpDownLeftRight(node)
-    val num = (0..3).random()
-    if (a[num].x == 1){
-        if (a[num].y == 0)
-            ChangePosition(a[num],false,96)
-        else
-            ChangePosition(a[num],false,-96)
-    }else{
-        if (a[num].x == 2)
-            ChangePosition(a[num],true,-96)
-        else
-            ChangePosition(a[num],true,96)
+
+fun randomPosition(node: MutableList<Nodes>)= runBlocking{
+    var i = 0
+
+    while (true) {
+        i = (1..8).random()
+        if (node[i].x - 1 == emptyPosition.x && node[i].y == emptyPosition.y) {
+            emptyPosition.x = node[i].x
+            emptyPosition.y = node[i].y
+            ChangePosition(node[i], true, -96)
+//            delay(10L)
+            Log.d("positions","1")
+            Log.d("position","x=${emptyPosition.x},y=${emptyPosition.y}")
+            Log.d("node[$i]","e")
+            break
+        }else if (node[i].x + 1 == emptyPosition.x && node[i].y == emptyPosition.y){
+            emptyPosition.x = node[i].x
+            emptyPosition.y = node[i].y
+            ChangePosition(node[i],true,96)
+//            delay(10L)
+            Log.d("positions","2")
+            Log.d("position","x=${emptyPosition.x},y=${emptyPosition.y}")
+            Log.d("node[$i]","e")
+            break
+        }
+        else if (node[i].y - 1 == emptyPosition.y && node[i].x == emptyPosition.x){
+            emptyPosition.x = node[i].x
+            emptyPosition.y = node[i].y
+            ChangePosition(node[i],false,-96)
+//            delay(10L)
+            Log.d("positions","3")
+            Log.d("position","x=${emptyPosition.x},y=${emptyPosition.y}")
+            Log.d("node[$i]","e")
+            break
+        }else if (node[i].y+1 == emptyPosition.y && node[i].x == emptyPosition.x){
+            emptyPosition.x = node[i].x
+            emptyPosition.y = node[i].y
+            ChangePosition(node[i],false,96)
+//            delay(10L)
+            Log.d("positions","4")
+            Log.d("position","x=${emptyPosition.x},y=${emptyPosition.y}")
+            Log.d("node[$i]","e")
+            break
+        }
 
     }
-}
-fun GetUpDownLeftRight(node: MutableList<Nodes>):MutableList<Nodes>{
-    var array = ArrayList<Nodes>()
-    for (i in 1 .. 8)
-        if (node[i].x == 1 || node[i].y == 1 && !(node[i].x == 1 && node[i].y == 1))
-            array.add(node[i])
-
-    return array
-
 }
