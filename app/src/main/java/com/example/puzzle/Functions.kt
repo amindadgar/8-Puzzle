@@ -1,11 +1,10 @@
 package com.example.puzzle
 
-import android.animation.ObjectAnimator
 import android.content.res.Resources
 import android.util.Log
-import kotlinx.coroutines.Delay
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 
 fun dpToPx(dp: Int): Float {
@@ -16,7 +15,7 @@ fun pxToDp(px: Int): Float {
     return (px / Resources.getSystem().getDisplayMetrics().density)
 }
 
-suspend fun ChangePosition(node: Nodes, X:Boolean, M:Int= 96){
+fun ChangePosition(node: Nodes, X:Boolean, M:Int= 96){
     if (X) {
         if (M>0) node.x++
         else node.x--
@@ -27,13 +26,6 @@ suspend fun ChangePosition(node: Nodes, X:Boolean, M:Int= 96){
             node.x ++
             return
         }
-        ObjectAnimator
-            .ofFloat(node.node, "translationX", dpToPx(M))
-            .apply {
-                duration = 400
-                start()
-            }
-        delay(500L)
     }
     else {
         if (M>0) node.y ++
@@ -45,22 +37,29 @@ suspend fun ChangePosition(node: Nodes, X:Boolean, M:Int= 96){
             node.y ++
             return
         }
-        ObjectAnimator
-            .ofFloat(node.node, "translationY", dpToPx(M))
-            .apply {
-                duration = 400
-                start()
-            }
-        delay(500L)
     }
 }
-
+fun changeposition(node:Nodes){  //LR short form of Left or Right
+    if (emptyPosition.x == 0)
+        node.node.animate().x(20f)
+    if (emptyPosition.y == 0)
+        node.node.animate().x(20f)
+    if (emptyPosition.x == 1)
+        node.node.animate().x(261f)
+    if (emptyPosition.y == 1)
+        node.node.animate().y(261f)
+    if (emptyPosition.x == 2)
+        node.node.animate().x(522f)
+    if (emptyPosition.y == 2)
+        node.node.animate().y(522f)
+}
 fun randomPosition(node: MutableList<Nodes>)= runBlocking{
     var i = 0
 
     while (true) {
         i = (1..8).random()
         if (node[i].x - 1 == emptyPosition.x && node[i].y == emptyPosition.y) {
+            changeposition(node[i])
             emptyPosition.x = node[i].x
             emptyPosition.y = node[i].y
             ChangePosition(node[i], true, -96)
@@ -70,6 +69,7 @@ fun randomPosition(node: MutableList<Nodes>)= runBlocking{
             Log.d("node[$i]","e")
             break
         }else if (node[i].x + 1 == emptyPosition.x && node[i].y == emptyPosition.y){
+            changeposition(node[i])
             emptyPosition.x = node[i].x
             emptyPosition.y = node[i].y
             ChangePosition(node[i],true,96)
@@ -80,6 +80,7 @@ fun randomPosition(node: MutableList<Nodes>)= runBlocking{
             break
         }
         else if (node[i].y - 1 == emptyPosition.y && node[i].x == emptyPosition.x){
+            changeposition(node[i])
             emptyPosition.x = node[i].x
             emptyPosition.y = node[i].y
             ChangePosition(node[i],false,-96)
@@ -89,6 +90,7 @@ fun randomPosition(node: MutableList<Nodes>)= runBlocking{
             Log.d("node[$i]","e")
             break
         }else if (node[i].y+1 == emptyPosition.y && node[i].x == emptyPosition.x){
+            changeposition(node[i])
             emptyPosition.x = node[i].x
             emptyPosition.y = node[i].y
             ChangePosition(node[i],false,96)
