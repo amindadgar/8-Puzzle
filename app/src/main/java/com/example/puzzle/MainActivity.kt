@@ -55,7 +55,10 @@ class MainActivity : AppCompatActivity() {
 
         randomButton.setOnClickListener {
 //            ChangePosition(nodes[4],false,-96)
-            randomPosition(nodes)
+//            randomPosition(nodes)
+            Console_randomPosition(nodes)
+//            nodes[8].node.animate().x(dpToPx(7))
+//            nodes[8].node.animate().y(dpToPx(103))
         }
 
     }
