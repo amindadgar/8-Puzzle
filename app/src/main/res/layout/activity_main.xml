@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,125 +10,150 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="50dp"
         android:background="@drawable/square_shape"
-        app:layout_constraintBottom_toTopOf="@+id/randomButton"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/spinner1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/ImageNumber1"
+            android:id="@+id/number1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight=".33"
             android:gravity="center"
-            app:layout_constraintBottom_toTopOf="@id/ImageNumber8"
+            app:layout_constraintBottom_toTopOf="@id/number8"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/ImageNumber2"
+            app:layout_constraintRight_toLeftOf="@+id/number2"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/number_1_big" />
 
         <ImageView
-            android:id="@+id/ImageNumber2"
+            android:id="@+id/number2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight=".33"
             android:gravity="center"
-            app:layout_constraintBottom_toTopOf="@+id/ImageNumber9"
-            app:layout_constraintLeft_toRightOf="@+id/ImageNumber1"
-            app:layout_constraintRight_toLeftOf="@+id/ImageNumber3"
+            app:layout_constraintBottom_toTopOf="@+id/number9"
+            app:layout_constraintLeft_toRightOf="@+id/number1"
+            app:layout_constraintRight_toLeftOf="@+id/number3"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/number_2_big" />
 
         <ImageView
-            android:id="@+id/ImageNumber3"
+            android:id="@+id/number3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".33"
             android:gravity="center"
-            app:layout_constraintLeft_toRightOf="@+id/ImageNumber2"
+            app:layout_constraintLeft_toRightOf="@+id/number2"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/number_3_big" />
 
         <ImageView
-            android:id="@+id/ImageNumber4"
+            android:id="@+id/number4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".33"
             android:gravity="center"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ImageNumber3"
+            app:layout_constraintTop_toBottomOf="@+id/number3"
             app:srcCompat="@drawable/number_4_big" />
 
         <ImageView
-            android:id="@+id/ImageNumber5"
+            android:id="@+id/number5"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".33"
             android:gravity="center"
-            app:layout_constraintLeft_toRightOf="@+id/ImageNumber9"
-            app:layout_constraintTop_toBottomOf="@+id/ImageNumber4"
+            app:layout_constraintLeft_toRightOf="@+id/number9"
+            app:layout_constraintTop_toBottomOf="@+id/number4"
             app:srcCompat="@drawable/number_5_big" />
 
         <ImageView
-            android:id="@+id/ImageNumber6"
+            android:id="@+id/number6"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".33"
             android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/ImageNumber7"
-            app:layout_constraintRight_toLeftOf="@+id/ImageNumber5"
-            app:layout_constraintTop_toBottomOf="@+id/ImageNumber9"
+            app:layout_constraintLeft_toRightOf="@+id/number7"
+            app:layout_constraintRight_toLeftOf="@+id/number5"
+            app:layout_constraintTop_toBottomOf="@+id/number9"
             app:srcCompat="@drawable/number_6_big" />
 
         <ImageView
-            android:id="@+id/ImageNumber7"
+            android:id="@+id/number7"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".33"
             android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/ImageNumber6"
-            app:layout_constraintTop_toBottomOf="@+id/ImageNumber8"
+            app:layout_constraintRight_toLeftOf="@+id/number6"
+            app:layout_constraintTop_toBottomOf="@+id/number8"
             app:srcCompat="@drawable/number_7_big" />
 
         <ImageView
-            android:id="@+id/ImageNumber8"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:id="@+id/number8"
+            android:layout_width="102dp"
+            android:layout_height="91dp"
             android:layout_weight=".33"
             android:gravity="center"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/ImageNumber9"
-            app:layout_constraintTop_toBottomOf="@+id/ImageNumber1"
+            app:layout_constraintRight_toLeftOf="@+id/number9"
+            app:layout_constraintTop_toBottomOf="@+id/number1"
             app:srcCompat="@drawable/number_8_big" />
 
-        <TextView
-            android:id="@+id/ImageNumber9"
+        <ImageView
+            android:id="@+id/number9"
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:layout_weight=".33"
             android:gravity="center"
-            app:layout_constraintBottom_toTopOf="@+id/ImageNumber6"
-            app:layout_constraintLeft_toRightOf="@+id/ImageNumber8"
-            app:layout_constraintRight_toLeftOf="@id/ImageNumber4"
-            app:layout_constraintTop_toBottomOf="@+id/ImageNumber2" />
+            app:layout_constraintBottom_toTopOf="@+id/number6"
+            app:layout_constraintLeft_toRightOf="@+id/number8"
+            app:layout_constraintRight_toLeftOf="@id/number4"
+            app:layout_constraintTop_toBottomOf="@+id/number2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="25dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="parent" />
+
     <Button
-        android:id="@+id/randomButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="140dp"
-        android:text="Random"
+        android:id="@+id/button"
+        app:layout_constraintBottom_toTopOf="@id/textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Start"
+        android:layout_marginBottom="15dp"
+        />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="80dp"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

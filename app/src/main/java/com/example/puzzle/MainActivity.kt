@@ -1,40 +1,84 @@
 package com.example.puzzle
 
-import android.animation.ObjectAnimator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.View
-import android.view.ViewTreeObserver
-import android.widget.Toast
+import android.widget.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.runBlocking
-import org.jetbrains.anko.custom.async
-import org.jetbrains.anko.doAsync
-import androidx.core.app.ComponentActivity
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-
 
 
 var emptyPosition = EmptyPosiotion(1,1)
+val GoalNodes :MutableList<Nodes> = ArrayList()
+var GoalArray:MutableList<String> = arrayListOf()
+var dropDownItem:Int = -1
 class MainActivity : AppCompatActivity() {
-    val nodes :MutableList<Nodes> = ArrayList()
+
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val nodes :MutableList<Nodes> = ArrayList()
+        val ToastLayout = layoutInflater.inflate(R.layout.toast_layout,findViewById(R.id.custom_toast_container))
+        val Toast = Toast(this)
+        val DropDown = findViewById<Spinner>(R.id.spinner1)
+        val spinnerItems = arrayListOf<String>("Random","A* algorithm")
+        val adapter = ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,spinnerItems)
+        DropDown.adapter = adapter
 
-        val number = arrayListOf<View>(findViewById<View>(R.id.ImageNumber1),
-            findViewById<View>(R.id.ImageNumber1),findViewById<View>(R.id.ImageNumber2),
-            findViewById<View>(R.id.ImageNumber3),findViewById<View>(R.id.ImageNumber4),
-            findViewById<View>(R.id.ImageNumber5),findViewById<View>(R.id.ImageNumber6),
-            findViewById<View>(R.id.ImageNumber7),findViewById<View>(R.id.ImageNumber8),
-            findViewById<View>(R.id.ImageNumber9))
 
+        DropDown.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                //do nothing
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                dropDownItem = position
+            }
+
+        }
+
+        initialPositions(nodes)
+        initialPositions(GoalNodes)
+        GoalArray = mutableListOf("number1","number2","number3","number4","number5","number6","number7","number8"
+            ,null) as MutableList<String>
+     //   Toast.makeText(this,nodes[1].node.resources.getResourceEntryName(nodes[1].node.id),Toast.LENGTH_LONG).show()
+
+
+
+        button.setOnClickListener {
+            println("Fuck" + dropDownItem)
+            if (dropDownItem == 0){
+                for (i in 0..16)
+                    Console_randomPosition(nodes)
+                Console_PutInPosition(nodes)
+                textView.text = "You will notice the items are positioning at the same time!\n" +
+                        "It's because Random algorithm has done its job and now positioning the items"
+
+            }else if (dropDownItem == 1){
+                Toast.setGravity(Gravity.BOTTOM, 0, 40)
+                Toast.view = ToastLayout
+                Toast.duration = android.widget.Toast.LENGTH_LONG
+                Toast.show()
+                arvin_search(nodes)
+                textView.text = "A* algorithm done with no freezing \uD83D\uDE03"
+            }
+        }
+
+    }
+    fun initialPositions(nodes:MutableList<Nodes>){
+        val number = arrayListOf<View>(findViewById<View>(R.id.number1),
+            findViewById<View>(R.id.number1),findViewById<View>(R.id.number2),
+            findViewById<View>(R.id.number3),findViewById<View>(R.id.number4),
+            findViewById<View>(R.id.number5),findViewById<View>(R.id.number6),
+            findViewById<View>(R.id.number7),findViewById<View>(R.id.number8),
+            findViewById<View>(R.id.number9))
 
         for (i in 0 .. 9)
             nodes.add(i,Nodes(number[i]))
@@ -43,37 +87,8 @@ class MainActivity : AppCompatActivity() {
         nodes[7].x = 0; nodes[7].y = 2; nodes[8].x = 0; nodes[8].y = 1
         nodes[9].x = 1; nodes[9].y = 1
 
-//        ChangePosition(nodes[4],true,-96)
-//        ChangePosition(nodes[4],true,96)
-//        Toast.makeText(this,"x=${emptyPosition.x},y=${emptyPosition.y}",Toast.LENGTH_LONG).show()
-//        randomPosition(nodes)
-//        randomPosition(nodes)
-//        randomPosition(nodes)
-//        randomPosition(nodes)
-        var j =0
-
-
-        randomButton.setOnClickListener {
-//            ChangePosition(nodes[4],false,-96)
-//            randomPosition(nodes)
-            Console_randomPosition(nodes)
-//            nodes[8].node.animate().x(dpToPx(7))
-//            nodes[8].node.animate().y(dpToPx(103))
-        }
-
     }
-//    fun yes(input:Int){
-//        val f = dpToPx(input)
-//        nodes[4].node.getViewTreeObserver().addOnGlobalLayoutListener(
-//            object : ViewTreeObserver.OnGlobalLayoutListener {
-//                override fun onGlobalLayout() {
-//                    // Layout has happened here.
-//                    ChangePosition(nodes[4],true,(nodes[4].node.x - f).toInt())
-//                    // Don't forget to remove your listener when you are done with it.
-//                    nodes[4].node.getViewTreeObserver().removeOnGlobalLayoutListener(this)
-//                }
-//            })
-//    }
+
 }
 
 

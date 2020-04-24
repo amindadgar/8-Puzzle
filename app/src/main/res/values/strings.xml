@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Puzzle</string>
+    <string name="Toast_TEXT">Warning: The algorithm is not efficient so application mabe freezes!\nTry reopening it.</string>
 </resources>
