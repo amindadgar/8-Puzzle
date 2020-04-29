@@ -8,4 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CustomActionBarTheme" parent="@style/AppTheme">
+        <item name="actionBarStyle">@style/CustomActionBar</item>
+    </style>
+
+
+    <style name="CustomActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="background">@drawable/actionbar_layeredlist</item>
+    </style>
+
+
 </resources>
