@@ -146,7 +146,6 @@ fun arvin_search(nodes: MutableList<Nodes>){
     else
         number = array[index].substring(6).toInt()
     while (array != GoalArray) {
-//        Log.d("array[$index]",number.toString())
         if (number == index + 1){
             if (index + 1 < 9) index++
             else index = 0
@@ -155,10 +154,8 @@ fun arvin_search(nodes: MutableList<Nodes>){
         }
 
         while (number < index + 1) {
-            println("Stuck in the first")
-            
-            if (index - 3 >= 0 && number <= index - 1) {  //I don't know
 
+            if (index - 3 >= 0 && number <= index - 1) {  //I don't know
                 temp = array[index]
                 array[index] = array[index - 3]
                 array[index - 3] = temp
@@ -205,6 +202,23 @@ fun arvin_search(nodes: MutableList<Nodes>){
     array.forEach {
         println("Apple "+it)
     }
+    nodes[1].node.animate().x(dpToPx(7))
+    nodes[1].node.animate().y(dpToPx(7))
+    nodes[2].node.animate().x(dpToPx(103))
+    nodes[2].node.animate().y(dpToPx(7))
+    nodes[3].node.animate().x(dpToPx(198))
+    nodes[3].node.animate().y(dpToPx(7))
+    nodes[4].node.animate().x(dpToPx(7))
+    nodes[4].node.animate().y(dpToPx(103))
+    nodes[5].node.animate().x(dpToPx(103))
+    nodes[5].node.animate().y(dpToPx(103))
+    nodes[6].node.animate().x(dpToPx(198))
+    nodes[6].node.animate().y(dpToPx(103))
+    nodes[7].node.animate().x(dpToPx(7))
+    nodes[7].node.animate().y(dpToPx(198))
+    nodes[8].node.animate().x(dpToPx(103))
+    nodes[8].node.animate().y(dpToPx(198))
+
 
 }
 fun GetArray(nodes:MutableList<Nodes>):MutableList<String>{

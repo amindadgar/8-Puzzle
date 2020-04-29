@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity() {
 
 
         button.setOnClickListener {
-            println("Fuck" + dropDownItem)
             if (dropDownItem == 0){
                 for (i in 0..16)
                     Console_randomPosition(nodes)
@@ -67,7 +66,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.duration = android.widget.Toast.LENGTH_LONG
                 Toast.show()
                 arvin_search(nodes)
-                textView.text = "A* algorithm done with no freezing \uD83D\uDE03"
+                textView.text = "A* algorithm done with no freezing !"
             }
         }
 
